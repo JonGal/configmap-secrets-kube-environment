@@ -23,3 +23,19 @@ spec:
           httpGet:
             path: /
             port: 8080
+        env:
+        - name: DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: database
+              key: DATABASE
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: username
+              key: USERNAME
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: password
+              key: PASSWORD
