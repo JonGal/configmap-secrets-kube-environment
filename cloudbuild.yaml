@@ -19,26 +19,27 @@ steps:
   timeout: 180s
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-kube-environment:1.1']
-- name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args: ['-c', 'kubectl', 'create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
+- name: 'ubuntu'
+  args: ['bash', 'echo', '$$PASSWORD', '>PASSWORD_file']
   secretEnv: ['PASSWORD']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'secret', 'generic', 'password', '--from-file=PASSWORD_file']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
-- name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args: ['-c', 'kubectl', 'create', 'secret', 'generic', 'password', '--from-literal=USERNAME=$$USERNAME']
-  #args: ['create', 'secret', 'generic', 'username', '--from-literal=USERNAME=$$USERNAME']
-  secretEnv: ['USERNAME']
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
-- name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args: ['-c', 'kubectl', 'create', 'secret', 'generic', 'password', '--from-literal=DATABASE=$$DATABASE']
-  #args: ['create', 'secret', 'generic', 'database', '--from-literal=DATABASE=$$DATABASE']
+- name: 'ubuntu'
+  args: ['bash', 'echo', '$$DATABASE', '>DATABASE_file']
   secretEnv: ['DATABASE']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'secret', 'generic', 'database', '--from-file=DATABASE_file']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
+- name: 'ubuntu'
+  args: ['bash', 'echo', '$$USERNAME', '>USERNAME_file']
+  secretEnv: ['USERNAME']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'secret', 'generic', 'username', '--from-file=USERNAME_file']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
