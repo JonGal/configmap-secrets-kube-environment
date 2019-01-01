@@ -6,10 +6,13 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-docker-environment:1.1']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
+  secretEnv: ['PASSWORD']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'username', '--from-literal=USERNAME=$$USERNAME']
+  secretEnv: ['USERNAME']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'database', '--from-literal=DATABASE=$$DATABASE']
+  secretEnv: ['DATABASE']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s/']
   env:
