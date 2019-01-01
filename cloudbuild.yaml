@@ -19,15 +19,6 @@ steps:
   timeout: 180s
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-docker-environment:1.1']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - kms
-  - decrypt
-  - --ciphertext-file=secrets.json.enc
-  - --plaintext-file=secrets.json
-  - --location=global
-  - --keyring=build-keyrin
-  - --key=demo-key
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
   secretEnv: ['PASSWORD']
