@@ -26,7 +26,7 @@ spec:
         env:
         - name: DATABASE
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: database
               key: DATABASE
         - name: USERNAME
