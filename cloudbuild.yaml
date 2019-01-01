@@ -23,17 +23,17 @@ steps:
   args: ['bash', './export_encrypted.sh']
   secretEnv: ['PASSWORD', 'DATABASE', 'USERNAME']
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'password', '--from-file=PASSWORD_file']
+  args: ['create', 'secret', 'generic', 'password', '--from-file=PASSWORD']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'database', '--from-file=DATABASE_file']
+  args: ['create', 'secret', 'generic', 'database', '--from-file=DATABASE']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'username', '--from-file=USERNAME_file']
+  args: ['create', 'secret', 'generic', 'username', '--from-file=USERNAME']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
