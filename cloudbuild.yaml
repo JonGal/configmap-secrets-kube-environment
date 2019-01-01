@@ -1,4 +1,10 @@
 steps:
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
+  secretEnv: ['PASSWORD']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/configmap-secrets-docker-environment:1.1', '.']
   timeout: 180s
@@ -6,12 +12,6 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-docker-environment:1.1']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['delete', 'secret', 'password database username', '--ignore-not-found=true']
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
-  secretEnv: ['PASSWORD']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
