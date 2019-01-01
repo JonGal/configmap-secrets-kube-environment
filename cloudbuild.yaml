@@ -5,19 +5,19 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-docker-environment:1.1']
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD', '-o yaml --dry-run | kubectl replace -f -' ]
+  args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD', '-o yaml', '--dry-run', '|', 'kubectl', 'replace', '-f -' ]
   secretEnv: ['PASSWORD']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'username', '--from-literal=USERNAME=$$USERNAME', '-o yaml --dry-run | kubectl replace -f -' ]
+  args: ['create', 'secret', 'generic', 'username', '--from-literal=USERNAME=$$USERNAME', '-o yaml', '--dry-run', '|', 'kubectl', 'replace', '-f -' ]
   secretEnv: ['USERNAME']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['create', 'secret', 'generic', 'database', '--from-literal=DATABASE=$$DATABASE', '-o yaml --dry-run | kubectl replace -f -' ]
+  args: ['create', 'secret', 'generic', 'database', '--from-literal=DATABASE=$$DATABASE', '-o yaml', '--dry-run', '|', 'kubectl', 'replace', '-f -' ]
   secretEnv: ['DATABASE']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
