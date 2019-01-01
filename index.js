@@ -1,8 +1,8 @@
 const express = require('express');
 const crypto = require('crypto');
 const app = express();
-const Username = process.env.USERNAME
-const Password = process.env.PASSWORD
+const Username = process.env.USERNAME;
+const Password = process.env.PASSWORD;
 const Database = process.env.DATABASE;
 
 const PORT = process.env.PORT || 8080;
