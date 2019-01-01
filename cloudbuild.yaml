@@ -20,7 +20,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/configmap-secrets-kube-environment:1.1']
 - name: 'ubuntu'
-  args: ['bash', 'echo', '$$PASSWORD', '>PASSWORD_file']
+  args: ['bash', '-c', '/bin/echo', '$$PASSWORD', '>PASSWORD_file']
   secretEnv: ['PASSWORD']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'password', '--from-file=PASSWORD_file']
