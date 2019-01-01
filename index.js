@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/ck_passwords', (req, res) => {
-  res.write(Userame: '+crypto.createHash('sha256').update(Username, 'utf8').digest("hex")+'\n');
-  res.write(Password: '+crypto.createHash('sha256').update(Password, 'utf8').digest("hex")+'\n');
-  res.write(Database: '+crypto.createHash('sha256').update(Database, 'utf8').digest("hex")+'\n');
+  res.write('Username: '+crypto.createHash('sha256').update(Username, 'utf8').digest("hex")+'\n');
+  res.write('Password: '+crypto.createHash('sha256').update(Password, 'utf8').digest("hex")+'\n');
+  res.write('Database: '+crypto.createHash('sha256').update(Database, 'utf8').digest("hex")+'\n');
   res.end(`\n`);
 });
 
