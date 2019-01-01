@@ -7,12 +7,21 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'password', '--from-literal=PASSWORD=$$PASSWORD']
   secretEnv: ['PASSWORD']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'username', '--from-literal=USERNAME=$$USERNAME']
   secretEnv: ['USERNAME']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'secret', 'generic', 'database', '--from-literal=DATABASE=$$DATABASE']
   secretEnv: ['DATABASE']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-build-example'
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s/']
   env:
