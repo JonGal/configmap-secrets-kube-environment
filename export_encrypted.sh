@@ -1,3 +1,3 @@
-echo "$DATABASE" >./DATABASE
-echo "$USERNAME" >./USERNAME
-echo "$PASSWORD" >./PASSWORD
+echo -n "$DATABASE" >./DATABASE
+echo -n "$USERNAME" >./USERNAME
+echo -n "$PASSWORD" >./PASSWORD
