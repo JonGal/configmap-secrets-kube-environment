@@ -17,6 +17,7 @@ spec:
       containers:
       - name: web
         image: gcr.io/kube-teach1/configmap-secrets-kube-environment:v1.1.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         livenessProbe:
